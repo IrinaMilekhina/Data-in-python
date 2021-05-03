@@ -9,7 +9,7 @@ data = {'furniture': ['chair', 'chair', 'chair', 'table', 'table', 'table', 'tab
                     600, 500, 390, 410, 430, 410]}
 frame = pd.DataFrame(data)
 
-frame.to_csv('fur.csv', index=False)
+frame.to_csv('fur.csv', index=False)  # для изменения разделителя добавить параметр sep=';'
 
 '''
 Для анализа данных с помощью pandas, необходима структура данных, совместимая с pandas.
@@ -26,13 +26,17 @@ pd.read_csv('https://pythonru.com/downloads/fur.csv', delimiter=';')
 Но для дальнейшего обращения к данным нужно сохранить их в переменную
 '''
 article_read = pd.read_csv('fur.csv', delimiter=',', encoding='utf-8')
-
+print('Методы\n')
 print(f'.shape - количество строк и столбцов:\n{article_read.shape}\n')
 print(f'.head() - вывод первых строк (по умолчанию 5):\n{article_read.head()}\n')
+print(f".dropna().head() - не выводить пропущенные значения:\n"
+      f"{article_read.dropna().head()}\n")
 print(f'.tail() - вывод последних строк (по умолчанию 5):\n{article_read.tail()}\n')
 print(f'.sample(5) - вывод случайных 5 строк (по умолчанию 1):\n{article_read.sample(5)}\n')
+
 print(f"print(article_read[['furniture', 'uniq_id']] - для вывода только нужных колонок:"
       f"\n{article_read[['furniture', 'uniq_id']]}\n")
+
 # ---------------------------------------------------------------------------------------------------------------------
 '''
 Фильтрация данных из DataFrame.
@@ -78,6 +82,9 @@ print(f".furniture.count():\n{article_read.furniture.count()}\n")
 # 2. Следуя той же логике, можно с легкостью найти сумму значений в колонке price с помощью:
 print(f".price.sum():\n{article_read.price.sum()}\n")
 
+print(f"['furniture'].isnull().sum() - количество пропущенных значений в колонке:\n"
+      f"{article_read['furniture'].isnull().sum()}\n")
+
 # 3,4.Какое наименьшее значение в колонке price? Определить это несложно:
 print(f".price.min():\n{article_read.price.min()}\n")
 
@@ -96,6 +103,11 @@ print(f".query('80 <= price < =200'):\n{article_read.query('80 <= price < =200')
 
 # метод .describe() сразу покажет основные статистические данные по колонкам с числовыми значениями фрейма
 print(f".describe():\n{article_read.describe()}\n")
+
+print(f'.furniture.unique() - вывод всех уникальных значений колонки:\n{article_read.furniture.unique()}\n')
+print(f'.furniture.nunique() - вывод количества уникальных значений колонки:\n{article_read.furniture.nunique()}\n')
+print(f"['furniture'].value_counts() - вывод количества по уникальным значениям колонки:\n"
+      f"{article_read['furniture'].value_counts()}\n")
 
 # ---------------------------------------------------------------------------------------------------------------------
 '''

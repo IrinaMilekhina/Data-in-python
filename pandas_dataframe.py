@@ -58,6 +58,10 @@ print(f'print(frame2.index):\n{frame2.index}\n')
 print(f'print(frame.values):\n{frame.values}\n')
 print(f'print(frame2.values):\n{frame2.values}\n')
 
+# Для изменения порядка колонок нужно в явном виде его задать:
+frame = frame[['price', 'color', 'object']]
+print(f"after frame = frame[['price', 'color', 'object']]):\n{frame}\n")
+
 # Указав в квадратных скобках название колонки, можно получить значения в ней.
 print(f"print(frame['price']):\n{frame['price']}\n")
 
@@ -68,8 +72,10 @@ print(f"type(var):\n{type(var)}\n")
 # Название колонки можно использовать и в качестве атрибута.
 print(f"print(frame.price):\n{frame.price}\n")
 
-# Для строк внутри Dataframe используется атрибут loc со значением индекса нужной строки.
-print(f"print(frame.loc[3]):\n{frame.loc[3]}\n")
+# Для вывода строк внутри Dataframe используется атрибут loc со значением имени индекса/индекса нужной строки.
+# или iloc[] для среза индексов
+print(f"print(frame2.loc['red']):\n{frame2.loc['red']}\n")
+print(f"print(frame.iloc[2:4]):\n{frame.iloc[2:4]}\n")
 
 '''
 Возвращаемый объект — это снова Series, где названия колонок — это уже метки массива индексов, 
@@ -90,3 +96,12 @@ print(f"print(frame[1:3]):\n{frame[1:3]}\n")
 а потом — индекс или метку строки.
 '''
 print(f"print(frame['object'][3]):\n{frame['object'][3]}\n")
+
+# Для копирования самого датафрейма, а не ссылки на него необходимо использовать метод .copy()
+frame3 = frame[['price', 'object', 'color']].copy()
+print(f"print(frame3) after frame3 = frame[['price', 'object', 'color']].copy():\n{frame3}\n")
+print(f"print(frame) after frame3 = frame[['price', 'object', 'color']].copy():\n{frame}\n")
+
+# для удаления строки есть метод .drop(название столбца или строки, axis=0 или 1 (строка или стобец),
+# inplace=True или False (текущий датасет или копия))
+print(f" frame3.drop(1, axis=0, inplace=False) - для удаления строки:\n{frame3.drop(1, axis=0, inplace=False)}\n")

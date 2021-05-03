@@ -35,6 +35,9 @@ print(f"fur.merge(fur_quantity) == fur_quantity.merge(fur)\n"
       f"разница будет лишь в порядке колонок в финальной таблице:"
       f"\n{fur_quantity.merge(fur)}\n")
 
+# Слияние обычно более сложное, чем в примере. Если необходимо совместить данные по нескольким параметрам,
+# нужно передать список: df1.merge(first, second, on=['name', 'id'])
+
 '''
 Базовый метод merge довольно прост. Но иногда к нему нужно добавить несколько параметров.
 
@@ -103,3 +106,7 @@ print(f"fur_quantity.sort_values(by=['quantity'], ascending=False).reset_index()
 '''
 print(f"fur_quantity.sort_values(by=['quantity'], ascending=False).reset_index(drop=True):\n"
       f"{fur_quantity.sort_values(by=['quantity'], ascending=False).reset_index(drop=True)}\n")
+
+print(f"df['furniture'].value_counts().sort_index()\n"
+      f"вывод количества по уникальным значениям колонки с сортировкой в алфавитном порядке:\n"
+      f"{fur['furniture'].value_counts().sort_index()}\n")
